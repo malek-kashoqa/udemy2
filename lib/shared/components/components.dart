@@ -27,3 +27,25 @@ Widget DefaultButton({
         borderRadius: BorderRadius.circular(radius),
       ),
     );
+
+Widget DefaultFormField({
+  required TextEditingController controller,
+  required String text,
+  required String? Function(String?)? validate,
+  bool obscureText = false,
+  Icon? suffixIcon,
+  Icon? prefixIcon,
+  TextInputType? keyboardType,
+  Function? onFieldSubmitted(value)?,
+  Function? onChanged(value)?,
+}) =>
+    TextFormField(
+      validator: validate,
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: text,
+        border: OutlineInputBorder(),
+        prefixIcon: prefixIcon,
+      ),
+    );

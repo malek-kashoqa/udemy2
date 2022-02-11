@@ -40,26 +40,36 @@ class _loginScreenState extends State<loginScreen> {
                   SizedBox(
                     height: 40.0,
                   ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'The email address must not be empty.';
+                  // TextFormField(
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'The email address must not be empty.';
+                  //     }
+                  //     return null;
+                  //   },
+                  //   controller: emailController,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   onFieldSubmitted: (value) {
+                  //     print(value);
+                  //   },
+                  //   onChanged: (value) {
+                  //     print(value);
+                  //   },
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Email Address',
+                  //     border: OutlineInputBorder(),
+                  //     prefixIcon: Icon(Icons.email),
+                  //   ),
+                  // ),
+                  DefaultFormField(
+                    controller: emailController,
+                    text: "Email",
+                    validate: (p0) {
+                      if (p0!.isEmpty) {
+                        return "email is empty";
                       }
                       return null;
                     },
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-                      print(value);
-                    },
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Email Address',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.email),
-                    ),
                   ),
                   SizedBox(
                     height: 15.0,
