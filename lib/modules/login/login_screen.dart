@@ -12,7 +12,7 @@ class _loginScreenState extends State<loginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool isPasswordVisible = false;
-  Icon passwordVisibleIcon = Icon(Icons.remove_red_eye);
+  Icon passwordVisibleIcon = Icon(Icons.visibility);
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -59,7 +59,7 @@ class _loginScreenState extends State<loginScreen> {
                     controller: passwordController,
                     text: "Password",
                     isPassword: !isPasswordVisible,
-                    prefixIcon: passwordVisibleIcon,
+                    prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: passwordVisibleIcon,
                       onPressed: () {
