@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:udemy2/shared/components/components.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class loginScreen extends StatefulWidget {
+  const loginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _loginScreenState createState() => _loginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _loginScreenState extends State<loginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool isPasswordVisible = false;
@@ -92,22 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Container(
-                  width: double.infinity,
-                  child: MaterialButton(
-                    onPressed: () {
+                defaultButton(
+                    text: "login",
+                    function: () {
                       print(emailController.text);
                       print(passwordController.text);
-                    },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    color: Colors.blue,
-                  ),
-                ),
+                    }),
                 SizedBox(
                   height: 20.0,
                 ),
