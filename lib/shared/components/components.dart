@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget defaultButton({
+Widget DefaultButton({
   double width = double.infinity,
   Color backgroundColor = Colors.blue,
   required Function function,
