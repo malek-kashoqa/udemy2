@@ -57,6 +57,7 @@ class _loginScreenState extends State<loginScreen> {
                   ),
                   DefaultFormField(
                     controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     text: "Password",
                     isPassword: !isPasswordVisible,
                     prefixIcon: Icon(Icons.lock),
