@@ -12,7 +12,6 @@ class _loginScreenState extends State<loginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool isPasswordVisible = false;
-  Icon passwordVisibleIcon = Icon(Icons.visibility);
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -62,14 +61,12 @@ class _loginScreenState extends State<loginScreen> {
                     isPassword: !isPasswordVisible,
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: passwordVisibleIcon,
+                      icon: isPasswordVisible
+                          ? Icon(Icons.visibility_off)
+                          : Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
                           isPasswordVisible = !isPasswordVisible;
-                          isPasswordVisible
-                              ? passwordVisibleIcon = Icon(Icons.visibility_off)
-                              : passwordVisibleIcon = Icon(Icons.visibility);
-                          ;
                         });
                       },
                     ),
