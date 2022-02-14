@@ -1,13 +1,21 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy2/layout/home_layout.dart';
 import 'package:udemy2/modules/counter/counter_screen.dart';
 import 'package:udemy2/modules/login/login_screen.dart';
 import 'package:udemy2/modules/bmi/bmi_screen.dart';
 import 'package:udemy2/modules/users/users_screen.dart';
+import 'package:udemy2/shared/bloc_observer.dart';
 import 'package:udemy2/shared/components/components.dart';
 
 void main() {
-  runApp(MyApp());
+  BlocOverrides.runZoned(
+    () {
+      // Use cubits...
+      runApp(MyApp());
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
