@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CounterScreen(),
+      home: HomeLayout(),
     );
   }
 }
@@ -96,6 +96,21 @@ class myHome extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => HomeLayout(),
+                  ),
+                );
+              },
+              text: "ToDo App",
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            DefaultButton(
+              isUpperCase: false,
+              function: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CounterScreen(),
                   ),
                 );
               },
