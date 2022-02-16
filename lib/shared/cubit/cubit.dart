@@ -35,6 +35,11 @@ class AppCubit extends Cubit<AppStates> {
     "Archived Tasks",
   ];
 
+  List<Map> newTasks = [];
+  List<Map> doneTasks = [];
+  List<Map> archivedTasks = [];
+
+
   void changeIndex(int index) {
     currentIndex = index;
     emit(AppChangeBottomNavBarState());
@@ -59,16 +64,12 @@ class AppCubit extends Cubit<AppStates> {
       },
       onOpen: (database) {
         print("DataBase Opened");
-        getDataFromDatabase(database).then((value) {
-          emit(AppGetDatabaseState());
-          tasks = value;
-          // print(tasks);
-        });
+        getDataFromDatabase(database);
       },
     );
   }
 
-  insertToDatabase({
+  void insertToDatabase({
     required String title,
     required String time,
     required String date,
@@ -90,31 +91,45 @@ class AppCubit extends Cubit<AppStates> {
           .then((value) {
         print("Raw ${value.toString()} inserted successfully");
         emit(AppInsertDatabaseState());
-        getDataFromDatabase(database).then((value) {
-          emit(AppGetDatabaseState());
-          tasks = value;
-          // print(tasks);
-        });
+        getDataFromDatabase(database);
       }).catchError((error) {
         print("Error inserting a new raw, error: ${error.toString()}");
       });
     });
   }
 
-  // void addNewTask(Transaction txn) {
-  //   txn
-  //       .rawInsert(
-  //           'INSERT INTO tasks(title, date, time, status) VALUES("Task 1", "1234", "12:12", "New")')
-  //       .then((value) {
-  //     print("Raw ${value.toString()} inserted successfully");
-  //   }).catchError((error) {
-  //     print("Error inserting a new raw, error: ${error.toString()}");
-  //   });
-  // }
+  void updateDatabase({required int id, required String status}) async {
+    database.rawUpdate("Update tasks SET status = ? where id = ?",["$status",id],).then((value) {
+      emit(AppUpdateDatabaseState());
+      getDataFromDatabase(database);
+    });
+  }
 
-  Future<List<Map>> getDataFromDatabase(database) async {
+  void deleteDatabase({required int id}) async {
+    database.rawUpdate("DELETE FROM tasks WHERE id = ?",[id],).then((value) {
+      emit(AppDeleteDatabaseState());
+      getDataFromDatabase(database);
+    });
+  }
+
+
+  void getDataFromDatabase(database) {
     emit(AppGetDatabaseLoadingState());
-    return await database.rawQuery('SELECT * FROM tasks');
+    database.rawQuery('SELECT * FROM tasks').then((List value) {
+      newTasks = [];
+      doneTasks = [];
+      archivedTasks = [];
+
+      value.forEach((element) {
+        if (element['status'] == 'New')
+          newTasks.add(element);
+        if (element['status'] == 'done')
+          doneTasks.add(element);
+        if (element['status'] == 'archived')
+          archivedTasks.add(element);
+      });
+      emit(AppGetDatabaseState());
+    });
   }
 
 
